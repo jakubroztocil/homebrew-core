@@ -50,4 +50,13 @@ class Httpie < Formula
     url "https://files.pythonhosted.org/packages/bd/11/293dd436aea955d45fc4e8a35b6ae7270f5b8e00b53cf6c024c83b657a11/PySocks-1.7.1.tar.gz"
     sha256 "3f8804571ebe159c380ac6de37643bb4685970655d3bba243530d6558b799aa0"
   end
+
+  def install
+    virtualenv_install_with_resources
+  end
+
+  test do
+    raw_url = "https://raw.githubusercontent.com/Homebrew/homebrew-core/master/Formula/httpie.rb"
+    assert_match "PYTHONPATH", shell_output("#{bin}/http --ignore-stdin #{raw_url}")
+  end
 end
